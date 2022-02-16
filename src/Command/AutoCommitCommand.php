@@ -183,7 +183,7 @@ class AutoCommitCommand extends Command
         try {
             $this->git->push('origin', 'master');
             $output->writeln([
-                '<info>成功</info>push代码到remote</info>',
+                '<info>成功push代码到remote</info>',
             ]);
             return true;
         } catch (Exception $exception) {
