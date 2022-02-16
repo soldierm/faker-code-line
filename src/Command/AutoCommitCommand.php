@@ -33,6 +33,13 @@ class AutoCommitCommand extends Command
     private $template;
 
     /**
+     * 本地git执行文件路径
+     *
+     * @var string
+     */
+    private $cmd;
+
+    /**
      * @var GitRepo
      */
     private $git;
@@ -43,6 +50,7 @@ class AutoCommitCommand extends Command
 
         $this->local = $config['local'];
         $this->template = $config['template'];
+        $this->cmd = $config['cmd'];
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -56,6 +64,7 @@ class AutoCommitCommand extends Command
         }
 
         try {
+            Git::setBin($this->cmd);
             $this->git = Git::open($this->local);
         } catch (Exception $exception) {
             $output->writeln([
