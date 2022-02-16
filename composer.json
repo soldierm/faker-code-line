@@ -1,0 +1,20 @@
+{
+    "name": "who/faker-code-line",
+    "description": "faker code line bugs/lines",
+    "autoload": {
+        "psr-4": {
+            "Who\\FakerCodeLine\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "who",
+            "email": "who@shein.com"
+        }
+    ],
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/console": "5.4.x-dev"
+    }
+}

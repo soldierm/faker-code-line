@@ -1,0 +1,215 @@
+package cn.dotfashion.soa.paps.tob.entity.mongo;
+
+import cn.dotfashion.soa.paps.vo.cart.response.PromotionRangeResponseVo;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author faker
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+//@Document
+public class CartLog implements Serializable {
+    @Field("a")
+    private String siteUid;
+
+    @Field("b")
+    private String currency;
+
+    @Field("c")
+    private Member member;
+
+    @Field("d")
+    private List<Cart> carts;
+
+    @Field("bd")
+    private List<StandardPromotionRange> standardPromotionRanges;
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Member {
+        @Field("f")
+        @Indexed
+        private Long memberId;
+        @Field("h")
+        private Integer level;
+        @Field("i")
+        private String siteFrom;
+        @Field("j")
+        private Long registerAt;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Cart {
+        @Field("m")
+        private Long id;
+        @Field("n")
+        private String productCode;
+        @Field("o")
+        private BigDecimal retailPrice;
+        @Field("p")
+        private BigDecimal salePrice;
+        @Field("q")
+        private String attrValueEn;
+        @Field("r")
+        private Integer categoryId;
+        @Field("s")
+        private Integer quantity;
+        @Field("t")
+        private Long promotionId;
+        @Field("u")
+        private Integer selected;
+        @Field("v")
+        private BigDecimal totalPrice;
+        @Field("w")
+        private BigDecimal unitPrice;
+        @Field("x")
+        private Integer promotionStatus;
+        @Field("y")
+        private List<PromotionInfo> promotionInfo;
+        @Field("z")
+        private List<PromotionLog> promotionLog;
+        @Field("at")
+        private List<ProductPromotionInfo> productPromotionInfo;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class PromotionInfo {
+        @Field("aa")
+        private String id;
+        @Field("ab")
+        private String typeId;
+        @Field("ac")
+        private String soldNum;
+        @Field("ad")
+        private String isOver;
+        @Field("ae")
+        private String singleOver;
+        @Field("af")
+        private String orderOver;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class PromotionLog implements Serializable {
+        @Field("ag")
+        private BigDecimal retailPrice;
+        @Field("ah")
+        private BigDecimal salePrice;
+        @Field("ai")
+        private Integer quantity;
+        @Field("aj")
+        private List<PromotionLogDetail> log;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class PromotionLogDetail implements Serializable {
+        @Field("ak")
+        private Long id;
+        @Field("al")
+        private BigDecimal salePriceOld;
+        @Field("am")
+        private BigDecimal salePrice;
+        @Field("an")
+        private BigDecimal discountPrice;
+        @Field("ao")
+        private Integer isPresent;
+        @Field("as")
+        private Integer isReturn;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ProductPromotionInfo implements Serializable {
+        @Field("au")
+        private Long promotionId;
+        @Field("av")
+        private Integer typeId;
+        @Field("aw")
+        private Integer soldNum;
+        @Field("ax")
+        private Integer singleOver;
+        @Field("ay")
+        private Integer orderOver;
+        @Field("az")
+        private Integer isPromotion;
+        @Field("ba")
+        private Integer promotionProductType;
+        @Field("bb")
+        private String memberOver;
+        @Field("bc")
+        private Integer stock;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class StandardPromotionRange {
+        @Field("be")
+        private Long promotionId;
+        @Field("bf")
+        private Integer typeId;
+        @Field("bg")
+        private Integer range;
+        @Field("bh")
+        private Integer next;
+        @Field("bi")
+        private Diff diff;
+        @Field("bj")
+        private List<Diff> allDiff;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Diff {
+        @Field("bk")
+        private Integer type;
+        @Field("bl")
+        private BigDecimal value;
+    }
+
+    @Field("ap")
+    private BigDecimal orderCurrencyRate;
+
+    @Field("aq")
+    @Indexed
+    private String insertAt;
+
+    @Field("ar")
+    @Indexed
+    private String ideId;
+
+    private static final List<String> indexes = new ArrayList<>();
+
+    static {
+        indexes.add("c.f");
+        indexes.add("aq");
+        indexes.add("ar");
+    }
+
+    public static List<String> getIndexes() {
+        return indexes;
+    }
+}
